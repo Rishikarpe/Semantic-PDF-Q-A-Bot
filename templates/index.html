@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PDF Q&A Bot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-xl bg-white p-8 rounded-xl shadow">
+    <h1 class="text-2xl font-bold mb-4 text-center">📄 PDF Q&A Bot</h1>
+    <form method="POST" class="space-y-4">
+      <textarea name="question" rows="3" class="w-full p-3 border rounded" placeholder="Ask a question..." required>{{ question }}</textarea>
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Ask</button>
+    </form>
+    {% if answer %}
+      <div class="mt-6">
+        <h2 class="text-lg font-semibold">🧠 Answer:</h2>
+        <p class="mt-2 bg-gray-100 p-4 rounded whitespace-pre-line">{{ answer }}</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
