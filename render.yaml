@@ -3,7 +3,6 @@ services:
     name: semantic-pdf-bot
     env: docker
     plan: free
-    repo: https://github.com/Rishikarpe/Semantic-PDF-Q-A-Bot
     branch: main
     dockerfilePath: ./dockerfile
     autoDeploy: true
