@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: semantic-pdf-bot
+    env: docker
+    plan: free
+    branch: main
+    healthCheckPath: /
