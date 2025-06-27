@@ -1,8 +1,8 @@
 services:
   - type: web
     name: semantic-pdf-bot
-    env: docker
+    env: python
     plan: free
-    branch: main
-    dockerfilePath: ./dockerfile
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --bind 0.0.0.0:10000"
     autoDeploy: true
