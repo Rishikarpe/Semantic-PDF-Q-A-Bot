@@ -1,78 +1,79 @@
-# Semantic PDF Q&A Bot
+# 📄 Semantic PDF Q&A Bot
 
-This repository contains a Python application that allows you to ask questions about the content of a PDF document and receive intelligent answers. The bot uses a semantic search approach with vector embeddings to find the most relevant context within the PDF and then uses the Mistral-7B language model via Ollama to generate a coherent answer.
+**Semantic PDF Q&A Bot** is a Python-based application that allows users to ask natural language questions about the contents of any PDF document and receive intelligent, context-aware answers. Leveraging semantic search and the power of local language models, it offers both a command-line interface and a user-friendly web app.
 
-The project includes two main implementations:
-1.  A command-line interface (CLI) for interacting with a predefined PDF.
-2.  A Flask web application that allows users to upload their own PDF and ask questions through a web UI.
+---
 
-## How It Works
+## 🔍 Key Features
 
-The process follows a Retrieval-Augmented Generation (RAG) pipeline:
+- **Semantic Search with Embeddings**: Finds the most relevant text chunks using vector similarity.
+- **Powered by Mistral 7B via Ollama**: Local LLM generates coherent, grounded answers.
+- **PDF Upload Support**: Easily ask questions about your own documents.
+- **RAG Pipeline Implementation**: Combines retrieval and generation for accurate results.
+- **Dual Interface**: Use via CLI or Web UI.
 
-1.  **PDF Loading and Chunking**: The text content is extracted from the PDF using `PyMuPDF`. This text is then divided into smaller, manageable chunks.
-2.  **Embedding Generation**: Each text chunk is converted into a numerical vector representation (embedding) using the `all-MiniLM-L6-v2` model from `sentence-transformers`.
-3.  **Vector Indexing**: The generated embeddings are stored in a `FAISS` (Facebook AI Similarity Search) index. This creates a searchable vector database that allows for efficient similarity searches.
-4.  **Semantic Search**: When a user asks a question, the question is also converted into an embedding. FAISS is then used to search the index for the text chunks with embeddings most similar to the question's embedding.
-5.  **Answer Generation**: The most relevant text chunks (the "context") are passed along with the original question to the `mistral:7b` model via Ollama. The model uses this context to generate a helpful and accurate answer.
+---
 
-## Technology Stack
+## ⚙️ How It Works
 
--   **Backend**: Python, Flask
--   **LLM**: Ollama (Mistral 7B)
--   **Embeddings**: Sentence-Transformers
--   **Vector Search**: FAISS
--   **PDF Parsing**: PyMuPDF (`fitz`)
--   **Frontend**: HTML, Tailwind CSS
+This project follows a **Retrieval-Augmented Generation (RAG)** architecture:
 
-## Getting Started
+1. **PDF Loading & Chunking**: Extracts text from PDFs using PyMuPDF and splits it into smaller chunks.
+2. **Embedding Generation**: Uses `all-MiniLM-L6-v2` from Sentence-Transformers to convert chunks into vector embeddings.
+3. **Vector Indexing**: FAISS indexes these embeddings for efficient semantic search.
+4. **Semantic Search**: User questions are embedded and compared against the index to retrieve the most relevant chunks.
+5. **Answer Generation**: Context chunks + user query are passed to Mistral-7B via Ollama for answer generation.
 
-### Prerequisites
+---
 
--   Python 3.8+
--   [Ollama](https://ollama.com/) installed and running.
--   The Mistral model pulled via Ollama:
-    ```sh
-    ollama pull mistral:7b
-    ```
+## 🧰 Tech Stack
 
-### Installation
+| Component       | Technology                   |
+|----------------|------------------------------|
+| **Backend**     | Python, Flask                |
+| **LLM**         | Mistral 7B via Ollama        |
+| **Embeddings**  | Sentence-Transformers        |
+| **Vector DB**   | FAISS                        |
+| **PDF Parsing** | PyMuPDF (`fitz`)             |
+| **Frontend**    | HTML, Tailwind CSS           |
 
-1.  Clone the repository:
-    ```sh
-    git clone https://github.com/rishikarpe/Semantic-PDF-Q-A-Bot.git
-    cd Semantic-PDF-Q-A-Bot
-    ```
+---
 
-2.  Install the required Python packages. It is recommended to use a virtual environment.
-    ```sh
-    pip install flask PyMuPDF sentence-transformers faiss-cpu numpy ollama werkzeug
-    ```
+## 🚀 Getting Started
 
-### Running the Application
+### 📦 Prerequisites
 
-You can run either the command-line version or the web application.
+- Python 3.8+
+- [Ollama](https://ollama.com/) installed and running
+- Pull the Mistral 7B model:
+  ```bash
+  ollama pull mistral:7b
 
-#### 1. Command-Line Interface (CLI)
+---
 
-This version works with a hardcoded `sample.pdf` file in the root directory.
+## Installation
+git clone https://github.com/rishikarpe/Semantic-PDF-Q-A-Bot.git
+cd Semantic-PDF-Q-A-Bot
+pip install flask PyMuPDF sentence-transformers faiss-cpu numpy ollama werkzeug
 
-```sh
+---
+
+## Running the Application
+- 1. Command-Line Interface (CLI)
+Works with a predefined sample.pdf:
 python main.py
-```
 
-You will be prompted to ask questions in the terminal. Type `exit` to quit.
-
-#### 2. Web Application
-
-This version provides a user interface to upload your own PDF file.
-
-```sh
+- 2. Web Application
+Provides a web UI to upload any PDF:
 python app2.py
-```
 
-Navigate to `http://127.0.0.1:5000` in your web browser. You can then upload a PDF, type your question, and receive an answer directly on the page.
+Then open your browser and visit:
+http://127.0.0.1:5000
 
-## Deployment
+---
 
-This project includes a `render.yaml` file for easy deployment as a web service on [Render](https://render.com/). The configuration specifies the build and start commands, ensuring a smooth deployment process.
+# Use Cases
+Academic research document analysis
+Legal or policy document summarization
+Internal report querying
+Contract review or compliance checks
